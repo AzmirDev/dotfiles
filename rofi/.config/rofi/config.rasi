@@ -6,7 +6,7 @@ configuration {
   modi: "window,run,drun";
 
   // enabling the icons
-    show-icons: true;
+  show-icons: true;
   icon-theme: "Papirus";
 
 

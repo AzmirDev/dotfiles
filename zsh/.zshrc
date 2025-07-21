@@ -7,8 +7,6 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.config/zsh:$PATH"
 export PATH="$HOME/.npm-global/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
-export ANDROID_HOME="/opt/android-sdk"
-export PATH="$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin"
 export TERMINAL="ghostty"
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -67,10 +65,13 @@ alias w='feh --bg-scale --randomize ~/Pictures/wallpapers/*'
 # Config editing
 alias profileconf='vim ~/.profile'
 alias zshconf='vim ~/.zshrc'
-alias vimconf='cd ~/.config/nvim && vim'
+alias vimconf='vim ~/.config/nvim'
 alias i3conf='vim ~/.config/i3/config'
 alias kittyconf='vim ~/.config/kitty/kitty.conf'
 alias ghosttyconf='vim ~/.config/ghostty/config'
+
+# Notes
+alias notes="nvim ~/personal/notes"
 
 # Package management
 alias update='sudo pacman -Syu'
