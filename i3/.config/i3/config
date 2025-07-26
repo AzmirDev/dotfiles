@@ -125,12 +125,12 @@ exec --no-startup-id nm-applet
 exec --no-startup-id picom -b --config ~/.config/picom/picom.conf
 exec --no-startup-id xrandr --output HDMI-0 --mode 1920x1080 --rate 120
 exec --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers/*
-# exec_always --no-startup-id blueman-applet
 exec_always --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers/*
 exec_always --no-startup-id autotiling
-exec_always --no-startup-id sh -c "sleep 1 && setxkbmap -option caps:escape"
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xrandr --output HDMI-0 --brightness 0.7
+exec_always --no-startup-id sh -c "sleep 1 && blueman-applet"
+exec_always --no-startup-id sh -c "sleep 1 && setxkbmap -option caps:escape"
 
 # Keybindings for specific applications
 bindsym $mod+Return exec ghostty -e zsh
@@ -140,3 +140,4 @@ bindsym $mod+Control+p exec ~/.config/rofi/rofi-powermenu.sh
 bindsym $mod+Control+a exec "rofi -show drun"
 bindsym $mod+w exec "feh --bg-scale --randomize ~/Pictures/wallpapers/*"
 bindsym Control+Shift+n nop
+bindsym $mod+Shift+s exec --no-startup-id flameshot gui

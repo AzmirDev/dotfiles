@@ -65,7 +65,7 @@ alias w='feh --bg-scale --randomize ~/Pictures/wallpapers/*'
 # Config editing
 alias profileconf='vim ~/.profile'
 alias zshconf='vim ~/.zshrc'
-alias vimconf='vim ~/.config/nvim'
+alias vimconf='cd ~/.config/nvim && vim'
 alias i3conf='vim ~/.config/i3/config'
 alias kittyconf='vim ~/.config/kitty/kitty.conf'
 alias ghosttyconf='vim ~/.config/ghostty/config'

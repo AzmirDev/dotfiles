@@ -5,11 +5,16 @@ PACMAN_PACKAGES=(
     # Shell & terminal
     zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions zsh-history-substring-search
     tmux
+		tree
+		zathura
+		obs-studio
+		autotiling
+		firefox
     pulsemixer
+		flameshot
 		pacman-contrib
 		stow
 		dunst
-		rmpc
     fastfetch
     fzf
     bat
@@ -48,6 +53,11 @@ PACMAN_PACKAGES=(
 AUR_PACKAGES=(
     visual-studio-code-bin
 		nautilus
+		hsphfpd
+		ani-cli
+    hsphfpd-git
+    jmtpfs
+    lazydocker
 )
 
 # Install yay if not present
