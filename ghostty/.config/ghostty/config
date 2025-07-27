@@ -1,4 +1,5 @@
 theme = Everforest Dark - Hard
+theme = catppuccin-mocha
 window-decoration = false
 auto-update = check
 window-padding-x = 0
@@ -6,3 +7,4 @@ window-padding-y = 0
 font-size = 16
 #background-opacity = 0.80
 #background-blur-radius = 15
+cursor-invert-fg-bg = true

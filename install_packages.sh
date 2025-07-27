@@ -7,7 +7,8 @@ PACMAN_PACKAGES=(
     tmux
 		tree
 		zathura
-		obs-studio
+		man-db
+		man-pages
 		autotiling
 		firefox
     pulsemixer

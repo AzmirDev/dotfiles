@@ -69,9 +69,11 @@ alias vimconf='cd ~/.config/nvim && vim'
 alias i3conf='vim ~/.config/i3/config'
 alias kittyconf='vim ~/.config/kitty/kitty.conf'
 alias ghosttyconf='vim ~/.config/ghostty/config'
+alias picomconf='vim ~/.config/picom/picom.conf'
+alias polybarconf='vim ~/.config/polybar/config.ini'
 
 # Notes
-alias notes="nvim ~/personal/notes"
+alias notes="cd ~/personal/notes && vim"
 
 # Package management
 alias update='sudo pacman -Syu'
