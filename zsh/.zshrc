@@ -38,7 +38,7 @@ eval "$(zoxide init zsh)"
 # ------------------------------------------
 # Key bindings
 # ------------------------------------------
-bindkey -s ^f "tmux-sessionizer\n"
+bindkey -s ^f "~/scripts/tmux-sessionizer\n"
 
 # ------------------------------------------
 # Aliases

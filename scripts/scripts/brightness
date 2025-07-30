@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 STEP=0.1  # Brightness change per step
 STATE_FILE="/tmp/.xrandr_brightness"

@@ -24,8 +24,8 @@ bindsym $mod+Control+m exec --no-startup-id pactl set-source-mute @DEFAULT_SOURC
 
 # Brightness down with $mod + <
 # Brightness up with $mod + >
-bindsym $mod+comma exec --no-startup-id ~/.local/bin/adjust-brightness down
-bindsym $mod+period exec --no-startup-id ~/.local/bin/adjust-brightness up
+bindsym $mod+comma exec --no-startup-id ~/scripts/brightness down
+bindsym $mod+period exec --no-startup-id ~/scripts/brightness up
 
 # Resize
 bindsym $mod+Ctrl+h resize shrink width 10 px or 10 ppt
