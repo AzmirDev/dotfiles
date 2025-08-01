@@ -105,18 +105,20 @@ bindsym $mod+Shift+r restart
 # }
 
 # Client borders and gaps
-client.focused          #4c7899 #285577 #ffffff #2e9ef4   #78ef1c
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-client.background       #ffffff
+client.focused          #f38ba8 #f38ba8 #cdd6f4 #f38ba8 #f38ba8
+client.focused_inactive #45475a #45475a #cdd6f4 #45475a #45475a
+client.unfocused        #313244 #313244 #6c7086 #313244 #313244
+client.urgent           #fab387 #fab387 #1e1e2e #fab387 #fab387
+client.placeholder      #1e1e2e #1e1e2e #cdd6f4 #1e1e2e #1e1e2e
+client.background       #1e1e2e
 
-# gaps inner 4px
-# gaps outer 4px
+gaps inner 4
+gaps outer 4
 smart_gaps off
-default_border pixel 1
-hide_edge_borders smart
+default_border pixel 2
+hide_edge_borders none
+
+for_window [class="ghostty"] border pixel 2
 
 # Autostart applications
 exec --no-startup-id dex --autostart --environment i3
@@ -125,7 +127,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id picom -b --config ~/.config/picom/picom.conf
 exec --no-startup-id xrandr --output HDMI-0 --mode 1920x1080 --rate 120
 exec --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers/*
-exec_always --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers/*
+exec_always --no-startup-id feh --bg-scale --randomize ~/Pictures/backgrounds/*
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xrandr --output HDMI-0 --brightness 0.7
@@ -133,11 +135,12 @@ exec_always --no-startup-id sh -c "sleep 1 && blueman-applet"
 exec_always --no-startup-id sh -c "sleep 1 && setxkbmap -option caps:escape"
 
 # Keybindings for specific applications
+bindsym Control+Shift+n nop
+
 bindsym $mod+Return exec ghostty -e zsh
 bindsym $mod+Shift+f exec nautilus
 bindsym $mod+b exec firefox
 bindsym $mod+Control+p exec ~/.config/rofi/rofi-powermenu.sh
 bindsym $mod+Control+a exec "rofi -show drun"
-bindsym $mod+w exec "feh --bg-scale --randomize ~/Pictures/wallpapers/*"
-bindsym Control+Shift+n nop
-bindsym $mod+Shift+s exec --no-startup-id flameshot gui
+bindsym $mod+w exec "feh --bg-scale --randomize ~/Pictures/backgrounds/*"
+bindsym $mod+Shift+s exec --no-startup-id ~/scripts/screenshot

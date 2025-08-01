@@ -49,7 +49,6 @@ alias vim='nvim'
 alias nano='nvim'
 alias py='python3'
 alias ts='ts-node'
-alias fd='fdfind'
 
 # File and directory navigation
 alias ..='cd ..'
@@ -58,9 +57,6 @@ alias ....='cd ../../..'
 
 alias la='ls -A'
 alias l='ls -CF'
-
-# Wallpaper
-alias w='feh --bg-scale --randomize ~/Pictures/wallpapers/*'
 
 # Config editing
 alias profileconf='vim ~/.profile'

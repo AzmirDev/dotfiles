@@ -1,98 +1,68 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # Define Pacman packages
 PACMAN_PACKAGES=(
     # Shell & terminal
-    zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions zsh-history-substring-search
-    tmux
-		tree
-		zathura
-		man-db
-		man-pages
-		autotiling
-		firefox
-    pulsemixer
-		flameshot
-		pacman-contrib
-		stow
-		dunst
-    fastfetch
-    fzf
-    bat
-    ripgrep
-    fd
-    btop
-		xclip
-		xrandr
-    curl
-    wget
-    git
-    python
-    go
-    gopls
-    nvm
-		mpv
-		vlc
+    zsh tmux tree zathura man-db man-pages autotiling firefox
+    pulsemixer flameshot pacman-contrib stow dunst fastfetch
+    fzf bat ripgrep fd btop xclip xrandr curl wget git python docker docker-compose
+    go gopls obs-studio nvm mpv vlc pavucontrol xorg-xrandr xorg-xkbutils picom
+		imagemagick libjpeg-turbo libpng libtiff lazygit
 
     # Neovim & related tools
-    neovim
-    lua-language-server
-    nodejs npm
-    clang   # For C/C++ LSP and Treesitter parsers that need compilation
-    gcc     # For building various tools
+    neovim lua-language-server nodejs npm clang gcc
+
+    # Network and desktop utilities
+    network-manager-applet nautilus
 
     # Window manager & desktop tools
-    i3
-    rofi
-    feh
-    ghostty
-    elisa
-    zoxide
+    i3 rofi feh ghostty elisa zoxide
 )
 
 # Define AUR packages
 AUR_PACKAGES=(
-    visual-studio-code-bin
-		nautilus
-		hsphfpd
-		ani-cli
-    hsphfpd-git
-    jmtpfs
-    lazydocker
+    visual-studio-code-bin hsphfpd ani-cli
+    hsphfpd-git jmtpfs lazydocker
 )
 
-# Install yay if not present
-if ! command -v yay &>/dev/null; then
-    echo "yay not found. Installing yay..."
-    sudo pacman -S --needed --noconfirm base-devel git
-    git clone https://aur.archlinux.org/yay.git
-    cd yay || exit 1
-    makepkg -si --noconfirm
-    cd ..
-    rm -rf yay
-fi
+# Ensure yay is installed
+install_yay() {
+    if ! command -v yay &>/dev/null; then
+        echo "🔧 Installing yay..."
+        sudo pacman -S --needed --noconfirm base-devel git
+        git clone https://aur.archlinux.org/yay.git
+        (cd yay && makepkg -si --noconfirm)
+        rm -rf yay
+    fi
+}
 
-# Function: Install Pacman packages
+# Install Pacman packages
 install_pacman_packages() {
-    echo "Updating system and installing Pacman packages..."
+    echo "📦 Installing Pacman packages..."
     sudo pacman -Syu --noconfirm
     for pkg in "${PACMAN_PACKAGES[@]}"; do
-        echo "Installing $pkg..."
-        sudo pacman -S --needed --noconfirm "$pkg" || echo "⚠️ Failed to install $pkg, skipping..."
+        echo "➡️  $pkg"
+        sudo pacman -S --needed --noconfirm "$pkg" || echo "⚠️  Failed to install $pkg"
     done
 }
 
-# Function: Install AUR packages
+# Install AUR packages
 install_aur_packages() {
-    echo "Installing AUR packages..."
+    echo "📦 Installing AUR packages..."
     for pkg in "${AUR_PACKAGES[@]}"; do
-        echo "Installing $pkg..."
-        yay -S --needed --noconfirm "$pkg" || echo "⚠️ Failed to install $pkg, skipping..."
+        echo "➡️  $pkg"
+        yay -S --needed --noconfirm "$pkg" || echo "⚠️  Failed to install $pkg"
     done
 }
 
-# Run
-install_pacman_packages
-install_aur_packages
+# Main
+main() {
+    install_yay
+    install_pacman_packages
+    install_aur_packages
+    echo "✅ All packages processed!"
+}
 
-echo "✅ All packages processed!"
+main
