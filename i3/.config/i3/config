@@ -1,6 +1,6 @@
 # Set modifier keys
-# set $mod Mod1 # Alt
-set $mod Mod4 # Super
+set $mod Mod1
+# set $mod Mod4
 
 # Font settings
 font pango:JetBrains Mono 8
@@ -52,7 +52,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 # Workspace management
 set $ws1 "1"
@@ -90,7 +90,7 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-bindsym $mod+Shift+c reload
+#bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Status bar
@@ -128,9 +128,7 @@ exec --no-startup-id dunst
 
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec_always --no-startup-id xrandr --output HDMI-0 --brightness 0.7
 exec_always --no-startup-id sh -c "sleep 1 && blueman-applet"
-exec_always --no-startup-id sh -c "sleep 1 && setxkbmap -option caps:escape"
 
 # Keybindings for specific applications
 bindsym Control+Shift+n nop
@@ -138,12 +136,14 @@ bindsym Control+Shift+n nop
 bindsym $mod+Return exec ghostty -e zsh
 bindsym $mod+Shift+f exec nautilus
 bindsym $mod+b exec firefox
-bindsym $mod+Control+p exec ~/.config/rofi/rofi-powermenu.sh
-bindsym $mod+Control+a exec "rofi -show drun"
+bindsym $mod+Escape exec ~/.config/rofi/rofi-powermenu.sh
+bindsym $mod+space exec "rofi -show drun"
 bindsym $mod+w exec "feh --bg-scale --randomize ~/Pictures/backgrounds/*"
+bindsym $mod+Shift+c exec ~/scripts/caps_to_esc
 
 # Scripts
 bindsym $mod+comma exec --no-startup-id ~/scripts/brightness down
 bindsym $mod+period exec --no-startup-id ~/scripts/brightness up
 bindsym $mod+Shift+s exec --no-startup-id ~/scripts/screenshot
 bindsym $mod+Shift+d exec --no-startup-id ~/scripts/define_word
+
