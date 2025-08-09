@@ -8,7 +8,7 @@ PACMAN_PACKAGES=(
     zsh tmux tree zathura man-db man-pages autotiling firefox
     pulsemixer flameshot pacman-contrib stow dunst fastfetch
     fzf bat ripgrep fd btop xclip xrandr curl wget git python docker docker-compose
-    go gopls obs-studio nvm mpv vlc pavucontrol xorg-xrandr xorg-xkbutils picom
+    go gopls nvm mpv vlc pavucontrol xorg-xrandr xorg-xkbutils picom
 		imagemagick libjpeg-turbo libpng libtiff lazygit
 
     # Neovim & related tools
@@ -19,6 +19,9 @@ PACMAN_PACKAGES=(
 
     # Window manager & desktop tools
     i3 rofi feh ghostty elisa zoxide
+
+		# creative tools
+		krita gimp obs-studio kdenlive
 )
 
 # Define AUR packages

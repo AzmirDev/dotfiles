@@ -1,5 +1,3 @@
-# Amazon Q pre block. Keep at the top of this file.
-[[ -f "${HOME}/.local/share/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/.local/share/amazon-q/shell/zshrc.pre.zsh"
 # ------------------------------------------
 # Initialization (before sourcing anything)
 # ------------------------------------------
@@ -69,7 +67,7 @@ alias picomconf='vim ~/.config/picom/picom.conf'
 alias polybarconf='vim ~/.config/polybar/config.ini'
 
 # Notes
-alias notes="cd ~/personal/notes && vim"
+alias notes="cd ~/Documents/notes && vim"
 
 # Package management
 alias update='sudo pacman -Syu'
@@ -92,5 +90,3 @@ runcpp() {
     g++ "$filename" -o "$output" && ./"$output"
 }
 
-# Amazon Q post block. Keep at the bottom of this file.
-[[ -f "${HOME}/.local/share/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/.local/share/amazon-q/shell/zshrc.post.zsh"

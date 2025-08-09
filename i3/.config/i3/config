@@ -1,6 +1,6 @@
 # Set modifier keys
-set $mod Mod1
-# set $mod Mod4
+# set $mod Mod1 # Alt
+set $mod Mod4 # Super
 
 # Font settings
 font pango:JetBrains Mono 8
@@ -22,10 +22,6 @@ bindsym $mod+Shift+m exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ tog
 bindsym $mod+Control+m exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 
-# Brightness down with $mod + <
-# Brightness up with $mod + >
-bindsym $mod+comma exec --no-startup-id ~/scripts/brightness down
-bindsym $mod+period exec --no-startup-id ~/scripts/brightness up
 
 # Resize
 bindsym $mod+Ctrl+h resize shrink width 10 px or 10 ppt
@@ -112,8 +108,8 @@ client.urgent           #fab387 #fab387 #1e1e2e #fab387 #fab387
 client.placeholder      #1e1e2e #1e1e2e #cdd6f4 #1e1e2e #1e1e2e
 client.background       #1e1e2e
 
-gaps inner 4
-gaps outer 4
+gaps inner 8
+gaps outer 8
 smart_gaps off
 default_border pixel 2
 hide_edge_borders none
@@ -127,7 +123,9 @@ exec --no-startup-id nm-applet
 exec --no-startup-id picom -b --config ~/.config/picom/picom.conf
 exec --no-startup-id xrandr --output HDMI-0 --mode 1920x1080 --rate 120
 exec --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers/*
-exec_always --no-startup-id feh --bg-scale --randomize ~/Pictures/backgrounds/*
+exec --no-startup-id sh ~/.fehbg
+exec --no-startup-id dunst
+
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xrandr --output HDMI-0 --brightness 0.7
@@ -143,4 +141,9 @@ bindsym $mod+b exec firefox
 bindsym $mod+Control+p exec ~/.config/rofi/rofi-powermenu.sh
 bindsym $mod+Control+a exec "rofi -show drun"
 bindsym $mod+w exec "feh --bg-scale --randomize ~/Pictures/backgrounds/*"
+
+# Scripts
+bindsym $mod+comma exec --no-startup-id ~/scripts/brightness down
+bindsym $mod+period exec --no-startup-id ~/scripts/brightness up
 bindsym $mod+Shift+s exec --no-startup-id ~/scripts/screenshot
+bindsym $mod+Shift+d exec --no-startup-id ~/scripts/define_word

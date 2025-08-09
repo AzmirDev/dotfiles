@@ -21,3 +21,11 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.showbreak = "↪ "
   end,
 })
+
+
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+  pattern = "dunstrc",
+  callback = function()
+    vim.bo.filetype = "dosini"
+  end,
+})
