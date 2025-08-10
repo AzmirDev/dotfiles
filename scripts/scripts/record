@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-RECORD_DIR="$HOME/Videos/Recording"
+RECORD_DIR="$HOME/Videos/recording"
 RECORD_PID_FILE="/tmp/ffmpeg_screenrec.pid"
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
 FILENAME="$RECORD_DIR/recording_$TIMESTAMP.mkv"

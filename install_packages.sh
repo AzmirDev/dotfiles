@@ -9,7 +9,7 @@ PACMAN_PACKAGES=(
     pulsemixer flameshot pacman-contrib stow dunst fastfetch
     fzf bat ripgrep fd btop xclip xrandr curl wget git python docker docker-compose
     go gopls nvm mpv vlc pavucontrol xorg-xrandr xorg-xkbutils picom
-		imagemagick libjpeg-turbo libpng libtiff lazygit
+		imagemagick libjpeg-turbo libpng libtiff lazygit unzip
 
     # Neovim & related tools
     neovim lua-language-server nodejs npm clang gcc

@@ -9,28 +9,27 @@ configuration {
   show-icons: true;
   icon-theme: "Papirus";
 
-
   // vim like keybindings
-    kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
+  kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
   kb-row-down: "Down,Control+j";
   kb-accept-entry: "Control+m,Return,KP_Enter";
   jterminal: "mate-terminal";
   kb-remove-to-eol: "Control+Shift+e";
   /*kb-mode-next: "Shift+Right,Control+Tab,Control+l";*/
-    kb-mode-previous: "Shift+Left,Control+Shift+Tab,Control+h";
+  kb-mode-previous: "Shift+Left,Control+Shift+Tab,Control+h";
   kb-remove-char-back: "BackSpace";
 }
 
 @theme "/dev/null"
 
 * {
-  bg: #1e1e2e66;
-  bg-alt: #585b7066;
-  bg-selected: #31324466;
+  // Catppuccin Mocha colors, no transparency
+  bg: #1e1e2e;
+  bg-alt: #302d41;
+  bg-selected: #45475a;
 
   fg: #cdd6f4;
-  fg-alt: #7f849c;
-
+  fg-alt: #bac2de;
 
   border: 0;
   margin: 0;
@@ -41,6 +40,9 @@ configuration {
 window {
   width: 30%;
   background-color: @bg;
+  border-radius: 6px;
+  border: 2px;
+  border-color: #89b4fa;
 }
 
 element {
@@ -61,7 +63,7 @@ element-text {
 }
 
 element-icon {
-  size: 14;
+  size: 24;
   padding: 0 10 0 0;
   background-color: transparent;
 }
@@ -86,6 +88,7 @@ listview {
 mainbox {
   children: [inputbar, listview];
   background-color: @bg;
+  border-radius: 6px;
 }
 
 prompt {
@@ -95,4 +98,4 @@ prompt {
   text-color: @fg;
 }
 
-/* vim: ft=sass
+/* vim: ft=sass */
