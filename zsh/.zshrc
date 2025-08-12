@@ -70,7 +70,7 @@ alias polybarconf='vim ~/.config/polybar/config.ini'
 alias notes="cd ~/Documents/notes && vim"
 
 # Package management
-alias update='sudo pacman -Syu'
+alias update='sudo pacman -Syu | yes'
 alias install='sudo pacman -S'
 alias remove='sudo pacman -Rns'
 

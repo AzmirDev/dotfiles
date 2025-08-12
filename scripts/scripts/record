@@ -1,47 +1,81 @@
 #!/usr/bin/env bash
+# record_controller.sh - Start/stop screen recording
+# Usage:
+#   ./record_controller.sh start [mic]
+#   ./record_controller.sh stop
+#   ./record_controller.sh status
 
 RECORD_DIR="$HOME/Videos/recording"
-RECORD_PID_FILE="/tmp/ffmpeg_screenrec.pid"
-TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
-FILENAME="$RECORD_DIR/recording_$TIMESTAMP.mkv"
-
-mkdir -p "$RECORD_DIR"
+PID_FILE="/tmp/record_game.pid"
+STATUS_FILE="/tmp/record_game.status"
 
 start_recording() {
-    ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i "$DISPLAY" \
-           -f pulse -i default \
-           -c:v libx264 -preset ultrafast -c:a aac -y "$FILENAME" > /dev/null 2>&1 &
-    echo $! > "$RECORD_PID_FILE"
+    if [[ -f "$PID_FILE" ]]; then
+        echo "Recording already in progress."
+        exit 1
+    fi
+
+    DATE=$(date +"%Y-%m-%d")
+    TIME=$(date +"%H-%M-%S")
+    OUTPUT_DIR="$RECORD_DIR/$DATE"
+    mkdir -p "$OUTPUT_DIR"
+    OUTPUT_FILE="$OUTPUT_DIR/recording_${TIME}.mkv"
+
+    SYSTEM_AUDIO=$(pactl get-default-sink)
+    MIC_SOURCE=$(pactl get-default-source)
+    SCREEN_SIZE=$(xrandr | awk '/\*/ {print $1; exit}')
+    FPS=60
+
+    CMD=(
+        ffmpeg
+        -video_size "$SCREEN_SIZE"
+        -framerate "$FPS"
+        -f x11grab -i :0.0
+        -f pulse -i "$SYSTEM_AUDIO.monitor"
+    )
+
+    if [[ "$1" == "mic" ]]; then
+        CMD+=(-f pulse -i "$MIC_SOURCE" \
+              -filter_complex "[1:a][2:a]amix=inputs=2:duration=longest" \
+              -map 0:v -map "[a]")
+    else
+        CMD+=(-map 0:v -map 1:a)
+    fi
+
+    CMD+=(
+        -c:v libx264 -preset ultrafast -crf 18
+        -c:a aac -b:a 192k
+        "$OUTPUT_FILE"
+    )
+
+    echo "recording" > "$STATUS_FILE"
+    "${CMD[@]}" &
+    echo $! > "$PID_FILE"
 }
 
 stop_recording() {
-    if [ -f "$RECORD_PID_FILE" ]; then
-        kill "$(cat "$RECORD_PID_FILE")" && rm "$RECORD_PID_FILE"
+    if [[ -f "$PID_FILE" ]]; then
+        kill "$(cat "$PID_FILE")"
+        rm -f "$PID_FILE"
+        echo "stopped" > "$STATUS_FILE"
+    else
+        echo "No recording in progress."
     fi
 }
 
-is_recording() {
-    [ -f "$RECORD_PID_FILE" ] && ps -p "$(cat "$RECORD_PID_FILE")" > /dev/null
+status() {
+    if [[ -f "$PID_FILE" ]]; then
+        # Red circle icon while recording, text stays normal
+        # echo "%{F#F38BA8}%{F-} REC"
+        echo "%{F#FF0000}%{F-} REC"
+    else
+        echo " idle"
+    fi
 }
 
 case "$1" in
-    start)
-        if ! is_recording; then
-            start_recording
-        fi
-        ;;
-    stop)
-        stop_recording
-        ;;
-    status)
-        if is_recording; then
-            echo "󰑊  Recording"
-        else
-            echo "  Record"
-        fi
-        ;;
-    *)
-        echo "Usage: $0 {start|stop|status}"
-        exit 1
-        ;;
+    start) shift; start_recording "$@" ;;
+    stop) stop_recording ;;
+    status) status ;;
+    *) echo "Usage: $0 {start [mic]|stop|status}" ;;
 esac
