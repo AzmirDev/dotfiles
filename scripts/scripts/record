@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# record_controller.sh - Start/stop screen recording
+# record_controller.sh - Start/stop screen recording (NVENC)
 # Usage:
 #   ./record_controller.sh start [mic]
 #   ./record_controller.sh stop
@@ -19,6 +19,7 @@ start_recording() {
     TIME=$(date +"%H-%M-%S")
     OUTPUT_DIR="$RECORD_DIR/$DATE"
     mkdir -p "$OUTPUT_DIR"
+
     OUTPUT_FILE="$OUTPUT_DIR/recording_${TIME}.mkv"
 
     SYSTEM_AUDIO=$(pactl get-default-sink)
@@ -28,6 +29,7 @@ start_recording() {
 
     CMD=(
         ffmpeg
+        -y
         -video_size "$SCREEN_SIZE"
         -framerate "$FPS"
         -f x11grab -i :0.0
@@ -35,29 +37,34 @@ start_recording() {
     )
 
     if [[ "$1" == "mic" ]]; then
-        CMD+=(-f pulse -i "$MIC_SOURCE" \
-              -filter_complex "[1:a][2:a]amix=inputs=2:duration=longest" \
-              -map 0:v -map "[a]")
+        CMD+=(
+            -f pulse -i "$MIC_SOURCE"
+            -filter_complex "[1:a][2:a]amix=inputs=2:duration=longest"
+            -map 0:v -map "[a]"
+        )
     else
         CMD+=(-map 0:v -map 1:a)
     fi
 
     CMD+=(
-        -c:v libx264 -preset ultrafast -crf 18
+        -c:v h264_nvenc -preset p5 -rc vbr -b:v 25M -maxrate 40M -bufsize 80M -pix_fmt yuv420p
         -c:a aac -b:a 192k
+        -vsync 1 -async 1
         "$OUTPUT_FILE"
     )
 
     echo "recording" > "$STATUS_FILE"
-    "${CMD[@]}" &
+    "${CMD[@]}" > /dev/null 2>&1 &
     echo $! > "$PID_FILE"
+    echo "Recording started: $OUTPUT_FILE"
 }
 
 stop_recording() {
     if [[ -f "$PID_FILE" ]]; then
-        kill "$(cat "$PID_FILE")"
+        kill -2 "$(cat "$PID_FILE")"   # SIGINT for clean stop
         rm -f "$PID_FILE"
         echo "stopped" > "$STATUS_FILE"
+        echo "Recording stopped."
     else
         echo "No recording in progress."
     fi
@@ -65,8 +72,6 @@ stop_recording() {
 
 status() {
     if [[ -f "$PID_FILE" ]]; then
-        # Red circle icon while recording, text stays normal
-        # echo "%{F#F38BA8}%{F-} REC"
         echo "%{F#FF0000}%{F-} REC"
     else
         echo " idle"

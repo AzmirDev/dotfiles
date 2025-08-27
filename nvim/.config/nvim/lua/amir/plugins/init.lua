@@ -11,15 +11,6 @@ return {
     end,
   },
 
-  -- comment lines
-  -- {
-  --   "echasnovski/mini.comment",
-  --   version = false,
-  --   config = function()
-  --     require("mini.comment").setup()
-  --   end,
-  -- },
-
   -- bracket pairs
   {
     "echasnovski/mini.pairs",

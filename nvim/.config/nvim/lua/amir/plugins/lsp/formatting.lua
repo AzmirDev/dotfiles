@@ -19,12 +19,13 @@ return {
 				lua = { "stylua" },
 				python = { "isort", "black" },
 				go = { "goimports", "gofmt" },
-				gotmpl = { "gofmt", "gofumpt" }, -- Add Go template support
+				gotmpl = { "gofmt", "gofumpt" },      -- Add Go template support
 				sql = { "sql-formatter", "sqlfmt" },
-				sh = { "shfmt" },            -- Added Shell Script formatter
-				toml = { "prettier" },       -- Added TOML support
-				c = { "clang-format" },      -- Added C formatter
-				cpp = { "clang-format" },    -- Added C++ formatter
+				sh = { "shfmt" },                     -- Added Shell Script formatter
+				toml = { "prettier" },                -- Added TOML support
+				c = { "clang-format" },               -- Added C formatter
+				cpp = { "clang-format" },             -- Added C++ formatter
+				ruby = { "rufo", "rubocop", "prettier" }, -- Added Ruby formatter
 			},
 			-- format_on_save = { -- Optional: Enable auto-format on save
 			--   timeout_ms = 1500,

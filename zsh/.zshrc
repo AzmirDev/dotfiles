@@ -47,6 +47,7 @@ alias vim='nvim'
 alias nano='nvim'
 alias py='python3'
 alias ts='ts-node'
+alias n='nvim .'
 
 # File and directory navigation
 alias ..='cd ..'
@@ -70,7 +71,7 @@ alias polybarconf='vim ~/.config/polybar/config.ini'
 alias notes="cd ~/Documents/notes && vim"
 
 # Package management
-alias update='sudo pacman -Syu | yes'
+alias update='sudo pacman -Syu'
 alias install='sudo pacman -S'
 alias remove='sudo pacman -Rns'
 
