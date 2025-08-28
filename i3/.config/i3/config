@@ -1,6 +1,6 @@
 # Set modifier keys
 set $mod Mod1
-# set $mod Mod4
+# set $mod Mod4 # Super
 
 # Font settings
 font pango:JetBrains Mono 8
@@ -43,10 +43,10 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move up
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h mark tmp; focus left;  swap container with mark tmp; unmark tmp
+bindsym $mod+Shift+l mark tmp; focus right; swap container with mark tmp; unmark tmp
+bindsym $mod+Shift+j mark tmp; focus down;  swap container with mark tmp; unmark tmp
+bindsym $mod+Shift+k mark tmp; focus up;    swap container with mark tmp; unmark tmp
 bindsym $mod+s split h
 bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
@@ -147,5 +147,12 @@ bindsym $mod+comma exec --no-startup-id ~/scripts/brightness down
 bindsym $mod+period exec --no-startup-id ~/scripts/brightness up
 bindsym $mod+Shift+s exec --no-startup-id ~/scripts/screenshot
 bindsym $mod+Shift+d exec --no-startup-id ~/scripts/define_word
-
 bindsym $mod+Shift+i exec --no-startup-id bash -c 'pgrep -x btop >/dev/null && pkill -x btop || ghostty -e btop'
+
+
+
+# ChatGPT
+bindsym $mod+a exec google-chrome-stable --app="https://chat.openai.com/"
+
+# YouTube
+bindsym $mod+y exec google-chrome-stable --app="https://www.youtube.com/"
