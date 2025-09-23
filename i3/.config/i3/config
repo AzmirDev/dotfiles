@@ -110,9 +110,9 @@ client.background       #1e1e2e
 
 gaps inner 8
 gaps outer 8
-smart_gaps off
+smart_gaps on
 default_border pixel 2
-hide_edge_borders none
+hide_edge_borders smart
 
 for_window [class="ghostty"] border pixel 2
 

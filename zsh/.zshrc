@@ -68,7 +68,7 @@ alias picomconf='vim ~/.config/picom/picom.conf'
 alias polybarconf='vim ~/.config/polybar/config.ini'
 
 # Notes
-alias notes="cd ~/Documents/notes && vim"
+alias notes="cd ~/notes && vim"
 
 # Package management
 alias update='sudo pacman -Syu'
@@ -91,3 +91,14 @@ runcpp() {
     g++ "$filename" -o "$output" && ./"$output"
 }
 
+
+# pnpm
+export PNPM_HOME="/home/azmir/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+# ---- pnpm fix ----
+export PNPM_HOME="$HOME/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
